@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nemzetközi Judo Arany Kupa 2026</title>
+
+  <style>
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+      font-family:Arial, sans-serif;
+    }
+
+    body{
+      background:radial-gradient(circle at top,#2b2b2b,#050505);
+      color:#f7f7f7;
+    }
+
+    a{text-decoration:none;color:inherit;}
+
+    .wrapper{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 16px 40px;
+    }
+
+    .accent{ color:#FFD700; }
+
+    /* NAV */
+    header{
+      position:sticky;
+      top:0;
+      z-index:10;
+      background:rgba(5,5,5,0.96);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid rgba(255,215,0,0.35);
+      box-shadow:0 4px 18px rgba(0,0,0,0.7);
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:10px 0;
+      gap:12px;
+    }
+
+    .nav-brand{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      min-width:190px;
+    }
+
+    .nav-logo{
+      height:26px;
+      width:auto;
+      display:block;
+      border-radius:6px;
+    }
+
+    .logo-text{
+      font-weight:bold;
+      letter-spacing:1px;
+      color:#FFD700;
+      text-transform:uppercase;
+      font-size:0.95rem;
+      white-space:nowrap;
+    }
+
+    .nav-center{
+      display:flex;
+      flex:1;
+      justify-content:center;
+    }
+    .nav-links{
+      display:flex;
+      gap:18px;
+      font-size:0.9rem;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .nav-links a{ opacity:0.85; }
+    .nav-links a:hover{
+      opacity:1;
+      color:#FFE88A;
+    }
+
+    /* Nyelvválasztó */
+    .lang-switch{
+      display:flex;
+      gap:6px;
+      min-width:160px;
+      justify-content:flex-end;
+      flex-wrap:wrap;
+    }
+    .lang-btn{
+      border-radius:999px;
+      padding:4px 9px;
+      font-size:0.75rem;
+      border:1px solid rgba(255,215,0,0.4);
+      background:rgba(10,10,10,0.95);
+      color:#f5f5f5;
+      cursor:pointer;
+    }
+    .lang-btn.active{
+      background:#FFD700;
+      color:#201500;
+      font-weight:bold;
+      box-shadow:0 0 10px rgba(255,215,0,0.8);
+      border-color:#FFD700;
+    }
+
+    /* HERO */
+    .hero{
+      padding:40px 0 32px;
+      display:grid;
+      grid-template-columns:1.2fr 1fr;
+      gap:32px;
+      align-items:center;
+    }
+
+    @media (max-width: 800px){
+      .hero{
+        grid-template-columns:1fr;
+        text-align:center;
+      }
+      .nav{ flex-wrap:wrap; }
+      .nav-center{ order:3; width:100%; }
+      .nav-brand{ justify-content:center; width:100%; }
+      .lang-switch{ justify-content:center; width:100%; }
+    }
+
+    .hero-title{
+      font-size:2.3rem;
+      margin-bottom:12px;
+      line-height:1.15;
+    }
+    .hero-sub{
+      font-size:1rem;
+      color:#d6d6d6;
+      margin-bottom:20px;
+    }
+    .hero-badges{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-bottom:20px;
+    }
+    .badge{
+      font-size:0.75rem;
+      padding:4px 9px;
+      border-radius:999px;
+      border:1px solid rgba(255,215,0,0.7);
+      color:#FFE88A;
+      background:rgba(10,10,10,0.85);
+    }
+
+    .hero-cta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .btn-primary{
+      background:linear-gradient(135deg,#FFE48A,#C8A200);
+      color:#211600;
+      padding:10px 18px;
+      border-radius:999px;
+      font-weight:bold;
+      font-size:0.95rem;
+      border:none;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      box-shadow:0 0 18px rgba(255,215,0,0.85);
+    }
+    .btn-secondary{
+      border-radius:999px;
+      padding:9px 16px;
+      border:1px solid rgba(180,180,180,0.7);
+      font-size:0.9rem;
+      background:rgba(10,10,10,0.9);
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      color:#f0f0f0;
+    }
+    .btn-primary:hover{ filter:brightness(1.05); }
+    .btn-secondary:hover{ border-color:#FFD700; }
+
+    .hero-card{
+      border-radius:22px;
+      background:radial-gradient(circle at top,#232323,#050505);
+      border:1px solid rgba(255,215,0,0.7);
+      box-shadow:
+        0 0 22px rgba(0,0,0,0.9),
+        0 0 26px rgba(255,215,0,0.4);
+      padding:20px 18px 18px;
+    }
+    .hero-mini{
+      width:100%;
+      border-radius:16px;
+      border:1px solid rgba(255,215,0,0.8);
+      padding:16px 12px 14px;
+      background:linear-gradient(140deg,#141414,#050505);
+      text-align:center;
+      margin-bottom:10px;
+    }
+    .hero-mini-logo{
+      width:80px;
+      height:80px;
+      border-radius:18px;
+      border:2px solid #FFD700;
+      margin:0 auto 10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#000;
+      color:#FFD700;
+      font-weight:bold;
+      font-size:0.8rem;
+      box-shadow:0 0 16px rgba(255,215,0,0.6);
+    }
+    .hero-mini-buttons{
+      display:flex;
+      justify-content:center;
+      gap:8px;
+      margin-top:8px;
+      flex-wrap:wrap;
+    }
+    .mini-btn{
+      width:34px;
+      height:34px;
+      border-radius:10px;
+      border:1px solid rgba(255,215,0,0.9);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:0.75rem;
+      color:#FFE88A;
+      background:rgba(0,0,0,0.9);
+    }
+    .hero-note{
+      font-size:0.75rem;
+      color:#b5b5b5;
+      margin-top:6px;
+      text-align:center;
+    }
+
+    /* SECTIONS */
+    section{ padding:28px 0 8px; }
+    h2.section-title{
+      font-size:1.6rem;
+      margin-bottom:12px;
+    }
+    .section-sub{
+      font-size:0.95rem;
+      color:#d0d0d0;
+      margin-bottom:18px;
+    }
+
+    /* Cards / blocks */
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:16px;
+    }
+    .card{
+      background:rgba(10,10,10,0.92);
+      padding:14px 14px 16px;
+      border-radius:14px;
+      border:1px solid #2b2b2b;
+      box-shadow:0 0 10px rgba(0,0,0,0.7);
+    }
+    .card-title{
+      font-weight:bold;
+      margin-bottom:8px;
+      color:#FFE88A;
+    }
+    .list{
+      font-size:0.88rem;
+      color:#e2e2e2;
+      margin-left:16px;
+      line-height:1.55;
+    }
+
+    /* Download */
+    .download-card{
+      margin-top:10px;
+      border-radius:18px;
+      background:rgba(8,8,8,0.97);
+      border:1px solid rgba(255,215,0,0.65);
+      box-shadow:
+        0 0 16px rgba(0,0,0,0.9),
+        0 0 18px rgba(255,215,0,0.2);
+      padding:16px;
+    }
+    .download-title{
+      font-size:1.2rem;
+      margin-bottom:6px;
+      color:#FFE88A;
+      font-weight:bold;
+    }
+    .download-sub{
+      font-size:0.95rem;
+      color:#d6d6d6;
+      margin-bottom:12px;
+    }
+
+    /* CONTACT */
+    .contact-grid{
+      display:grid;
+      grid-template-columns:1.1fr 1fr;
+      gap:20px;
+      align-items:flex-start;
+    }
+    @media (max-width:800px){
+      .contact-grid{ grid-template-columns:1fr; }
+    }
+    .contact-text{
+      font-size:0.9rem;
+      color:#e4e4e4;
+    }
+    .contact-box{
+      background:rgba(8,8,8,0.97);
+      border-radius:14px;
+      border:1px solid rgba(255,215,0,0.6);
+      padding:14px;
+      box-shadow:0 0 16px rgba(0,0,0,0.85);
+    }
+    .contact-buttons{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:10px;
+    }
+    .contact-small{
+      font-size:0.8rem;
+      color:#b3b3b3;
+      margin-top:6px;
+    }
+
+    footer{
+      text-align:center;
+      font-size:0.75rem;
+      color:#8a8a8a;
+      padding:16px 0 0;
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="wrapper nav">
+    <div class="nav-brand">
+      <!-- TODO: ide a saját logód fájlneve -->
+      <img src="logo.png" alt="Judo Arany Kupa logó" class="nav-logo" />
+      <span class="logo-text" data-i18n="logo-text">Nemzetközi Judo Arany Kupa 2026</span>
+    </div>
+
+    <div class="nav-center">
+      <nav class="nav-links">
+        <a href="#about" data-i18n="nav-about">Verseny</a>
+        <a href="#location" data-i18n="nav-location">Helyszín</a>
+        <a href="#categories" data-i18n="nav-categories">Kategóriák</a>
+        <a href="#download" data-i18n="nav-download">Letöltés</a>
+        <a href="#contact" data-i18n="nav-contact">Kapcsolat</a>
+      </nav>
+    </div>
+
+    <div class="lang-switch">
+      <button class="lang-btn active" id="btn-hu">HU</button>
+      <button class="lang-btn" id="btn-ro">RO</button>
+      <button class="lang-btn" id="btn-en">EN</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrapper">
+
+  <!-- HERO -->
+  <section class="hero" id="about">
+    <div>
+      <h1 class="hero-title" data-i18n="hero-title"></h1>
+      <p class="hero-sub" data-i18n="hero-sub"></p>
+
+      <div class="hero-badges">
+        <span class="badge" data-i18n="badge1"></span>
+        <span class="badge" data-i18n="badge2"></span>
+        <span class="badge" data-i18n="badge3"></span>
+      </div>
+
+      <div class="hero-cta">
+        <a class="btn-primary"
+           href="#download"
+           data-i18n="hero-cta-primary"></a>
+
+        <a class="btn-secondary" href="#categories" data-i18n="hero-cta-secondary"></a>
+      </div>
+    </div>
+
+    <!-- preview -->
+    <div class="hero-card">
+      <div class="hero-mini">
+        <div class="hero-mini-logo" data-i18n="preview-logo">JUDO</div>
+        <div style="font-size:0.9rem;margin-bottom:2px;" data-i18n="preview-name">Arany Kupa 2026</div>
+        <div style="font-size:0.75rem;color:#c7c7c7;" data-i18n="preview-desc"></div>
+        <div class="hero-mini-buttons">
+          <div class="mini-btn">📍</div>
+          <div class="mini-btn">⏱</div>
+          <div class="mini-btn">🥋</div>
+          <div class="mini-btn">📄</div>
+          <div class="mini-btn">☎</div>
+        </div>
+      </div>
+      <p class="hero-note" data-i18n="preview-note"></p>
+    </div>
+  </section>
+
+  <!-- VERSENY LEÍRÁS -->
+  <section>
+    <h2 class="section-title" data-i18n="about-title"></h2>
+    <p class="section-sub" data-i18n="about-sub"></p>
+
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-title" data-i18n="about-card1-title"></div>
+        <ul class="list">
+          <li data-i18n="about-li1"></li>
+          <li data-i18n="about-li2"></li>
+          <li data-i18n="about-li3"></li>
+          <li data-i18n="about-li4"></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title" data-i18n="about-card2-title"></div>
+        <ul class="list">
+          <li data-i18n="about-li5"></li>
+          <li data-i18n="about-li6"></li>
+          <li data-i18n="about-li7"></li>
+          <li data-i18n="about-li8"></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title" data-i18n="about-card3-title"></div>
+        <ul class="list">
+          <li data-i18n="about-li9"></li>
+          <li data-i18n="about-li10"></li>
+          <li data-i18n="about-li11"></li>
+          <li data-i18n="about-li12"></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- HELYSZÍN -->
+  <section id="location">
+    <h2 class="section-title" data-i18n="location-title"></h2>
+    <p class="section-sub" data-i18n="location-sub"></p>
+
+    <div class="card">
+      <div class="card-title" data-i18n="location-card-title"></div>
+      <ul class="list">
+        <li data-i18n="location-li1"></li>
+        <li data-i18n="location-li2"></li>
+        <li data-i18n="location-li3"></li>
+        <li data-i18n="location-li4"></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- KATEGÓRIÁK -->
+  <section id="categories">
+    <h2 class="section-title" data-i18n="categories-title"></h2>
+    <p class="section-sub" data-i18n="categories-sub"></p>
+
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-title" data-i18n="cat-card1-title"></div>
+        <ul class="list">
+          <li data-i18n="cat1"></li>
+          <li data-i18n="cat2"></li>
+          <li data-i18n="cat3"></li>
+          <li data-i18n="cat4"></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title" data-i18n="cat-card2-title"></div>
+        <ul class="list">
+          <li data-i18n="cat5"></li>
+          <li data-i18n="cat6"></li>
+          <li data-i18n="cat7"></li>
+          <li data-i18n="cat8"></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title" data-i18n="cat-card3-title"></div>
+        <ul class="list">
+          <li data-i18n="cat9"></li>
+          <li data-i18n="cat10"></li>
+          <li data-i18n="cat11"></li>
+          <li data-i18n="cat12"></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- LETÖLTÉS (WORD) -->
+  <section id="download">
+    <h2 class="section-title" data-i18n="download-section-title"></h2>
+
+    <div class="download-card">
+      <div class="download-title" data-i18n="download-title"></div>
+      <div class="download-sub" data-i18n="download-sub"></div>
+
+      <!-- ✅ LETÖLTÉS GOMB -->
+      <a class="btn-primary" id="btn-download" href="#" target="_blank" rel="noopener" data-i18n="download-btn"></a>
+
+      <div class="hero-note" style="margin-top:10px;" data-i18n="download-note"></div>
+    </div>
+  </section>
+
+  <!-- KAPCSOLAT -->
+  <section id="contact">
+    <h2 class="section-title" data-i18n="contact-title"></h2>
+
+    <div class="contact-grid">
+      <div class="contact-text">
+        <p data-i18n="contact-main"></p>
+        <p style="margin-top:10px;" data-i18n="contact-list-intro"></p>
+        <ul class="list">
+          <li data-i18n="contact-li1"></li>
+          <li data-i18n="contact-li2"></li>
+          <li data-i18n="contact-li3"></li>
+        </ul>
+      </div>
+
+      <div class="contact-box">
+        <div style="font-weight:bold;margin-bottom:6px;" data-i18n="contact-direct"></div>
+        <div class="contact-buttons">
+          <a class="btn-secondary" href="tel:+40740901573" data-i18n="contact-call"></a>
+          <a class="btn-secondary" href="mailto:steliannagy@yahoo.com" data-i18n="contact-email"></a>
+          <a class="btn-primary"
+             href="https://wa.me/40740901573"
+             target="_blank"
+             rel="noopener"
+             data-i18n="contact-whatsapp"></a>
+        </div>
+        <div class="contact-small" data-i18n="contact-langs"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span data-i18n="footer-text"></span>
+  </footer>
+
+</main>
+
+<script>
+/* ==========================
+   NYELV + SZÖVEGEK
+   ========================== */
+let currentLang = 'hu';
+
+/* ==========================
+   ✅ IDE RAKD BE A WORD LETÖLTÉSI LINKET
+   ==========================
+   Példa (GitHub Pages / direct link):
+   const DOWNLOAD_URL = "https://sajatoldalad.hu/files/Nevezesi_lista.docx";
+*/
+const DOWNLOAD_URL = "IDE_ILLASZD_BE_A_WORD_LINKET.docx"; // <-- ITT CSERÉLD LE!
+
+function refreshDownloadButton(){
+  const btn = document.getElementById("btn-download");
+  btn.setAttribute("href", DOWNLOAD_URL);
+}
+
+const texts = {
+  hu: {
+    "logo-text": "Nemzetközi Judo Arany Kupa 2026",
+
+    "nav-about": "Verseny",
+    "nav-location": "Helyszín",
+    "nav-categories": "Kategóriák",
+    "nav-download": "Letöltés",
+    "nav-contact": "Kapcsolat",
+
+    "hero-title": 'Nemzetközi <span class="accent">Judo Arany Kupa</span> 2026',
+    "hero-sub": "Nemzetközi utánpótlás és felnőtt judo verseny Nagyváradon. <br>Részletes információk, kategóriák és letölthető nevezési/ellenőrző lista egy helyen.",
+    "badge1": "Nemzetközi verseny",
+    "badge2": "Nagyvárad (Oradea)",
+    "badge3": "Borș(i) Sportcsarnok",
+    "hero-cta-primary": "📄 Letöltések",
+    "hero-cta-secondary": "🥋 Kategóriák megtekintése",
+
+    "preview-logo": "JUDO",
+    "preview-name": "Arany Kupa 2026",
+    "preview-desc": "Verseny infó • helyszín • kategóriák • letöltések",
+    "preview-note": "Minden fontos info gyorsan, mobilbarát formában – csapatoknak és szülőknek is.",
+
+    "about-title": "Verseny leírás",
+    "about-sub": "Rövid, átlátható összefoglaló a Nemzetközi Judo Arany Kupa 2026 eseményről.",
+    "about-card1-title": "Általános információk",
+    "about-li1": "Nemzetközi judo verseny (klubok, egyesületek részére).",
+    "about-li2": "Cél: sportszerű küzdelem, tapasztalatszerzés, közösségépítés.",
+    "about-li3": "Mérlegelés és verseny lebonyolítás a helyszínen.",
+    "about-li4": "Díjazás: érem / oklevél (szervezői kiírás szerint).",
+
+    "about-card2-title": "Részvétel & nevezés",
+    "about-li5": "Nevezés előzetesen a szervezők által megadott módon.",
+    "about-li6": "Kérjük a pontos név, klub, kategória megadását.",
+    "about-li7": "Orvosi igazolás / biztosítás a szabályzat szerint.",
+    "about-li8": "A szervezők fenntartják a program módosítás jogát.",
+
+    "about-card3-title": "Fontos tudnivalók",
+    "about-li9": "Kérjük időben érkezni a mérlegeléshez.",
+    "about-li10": "Sportfelszerelés: judo gi (fehér/kék) ajánlott.",
+    "about-li11": "Közönség és kísérők számára kijelölt helyek.",
+    "about-li12": "További infó: kapcsolat szekció / WhatsApp.",
+
+    "location-title": "Helyszín",
+    "location-sub": "A verseny Romániában, Nagyváradon kerül megrendezésre.",
+    "location-card-title": "Részletek",
+    "location-li1": "Ország: Románia",
+    "location-li2": "Város: Nagyvárad (Oradea)",
+    "location-li3": "Csarnok: Borș(i) Sportcsarnok",
+    "location-li4": "Megközelítés: autóval és tömegközlekedéssel is könnyen elérhető (parkolás a helyszínen a lehetőségek szerint).",
+
+    "categories-title": "Kategóriák",
+    "categories-sub": "A kategóriák a szervezői kiírás szerint kerülnek véglegesítésre. Itt egy átlátható lista (minta).",
+    "cat-card1-title": "Korcsoportok (minta)",
+    "cat1": "U10 (Gyermek)",
+    "cat2": "U12 (Diák)",
+    "cat3": "U14 (Serdülő)",
+    "cat4": "U16 (Ifjúsági)",
+    "cat-card2-title": "További korcsoportok",
+    "cat5": "U18 (Junior)",
+    "cat6": "U21",
+    "cat7": "Felnőtt / Senior",
+    "cat8": "Veterán (ha lesz kiírásban)",
+    "cat-card3-title": "Nemek & súlycsoportok",
+    "cat9": "Fiú / Lány kategóriák",
+    "cat10": "Súlycsoportok: a hivatalos kiírás szerint",
+    "cat11": "Mérlegelés a verseny napján (idősáv szerint)",
+    "cat12": "Végleges táblák a nevezések alapján",
+
+    "download-section-title": "Letöltések",
+    "download-title": "Word letöltés – nevezési / ellenőrző lista",
+    "download-sub": "Innen tudod letölteni a szervezők által megadott Word dokumentumot (lista / nevezés / ellenőrzés).",
+    "download-btn": "⬇️ Word lista letöltése",
+    "download-note": "Megjegyzés: a gomb működéséhez a kódban cseréld ki a DOWNLOAD_URL értékét a valódi linkre.",
+
+    "contact-title": "Kapcsolat",
+    "contact-main": "Kérdésed van a versennyel, nevezéssel vagy kategóriákkal kapcsolatban? Írj vagy hívj bátran.",
+    "contact-list-intro": "Hasznos, ha megírod: ",
+    "contact-li1": "klub / egyesület neve;",
+    "contact-li2": "korcsoport és várható létszám;",
+    "contact-li3": "bármilyen speciális kérés (időpont, mérlegelés stb.).",
+    "contact-direct": "Közvetlen elérhetőségek",
+    "contact-call": "📞 Hívás",
+    "contact-email": "✉️ Email",
+    "contact-whatsapp": "💬 WhatsApp üzenet",
+    "contact-langs": "Válaszolunk magyarul, románul és angolul is. 🙂",
+
+    "footer-text": "© 2026 Nemzetközi Judo Arany Kupa – Minden jog fenntartva."
+  },
+
+  ro: {
+    "logo-text": "Cupa Internațională de Judo „Arany” 2026",
+
+    "nav-about": "Competiție",
+    "nav-location": "Locație",
+    "nav-categories": "Categorii",
+    "nav-download": "Descărcare",
+    "nav-contact": "Contact",
+
+    "hero-title": 'Cupa Internațională <span class="accent">de Judo Arany</span> 2026',
+    "hero-sub": "Competiție internațională de judo la Oradea. <br>Informații, categorii și listă Word de descărcat într-un singur loc.",
+    "badge1": "Competiție internațională",
+    "badge2": "Oradea",
+    "badge3": "Sala Sporturilor Borș(i)",
+    "hero-cta-primary": "📄 Descărcări",
+    "hero-cta-secondary": "🥋 Vezi categoriile",
+
+    "preview-logo": "JUDO",
+    "preview-name": "Arany 2026",
+    "preview-desc": "Info • locație • categorii • descărcări",
+    "preview-note": "Totul clar, rapid și optimizat pentru mobil – util pentru cluburi și părinți.",
+
+    "about-title": "Descrierea competiției",
+    "about-sub": "Prezentare scurtă și clară despre Cupa Internațională de Judo Arany 2026.",
+    "about-card1-title": "Informații generale",
+    "about-li1": "Competiție internațională de judo (cluburi / asociații).",
+    "about-li2": "Scop: fair-play, experiență, dezvoltare sportivă.",
+    "about-li3": "Cântar + desfășurare la locație.",
+    "about-li4": "Premiere: medalie / diplomă (conform regulamentului).",
+
+    "about-card2-title": "Participare & înscriere",
+    "about-li5": "Înscriere în avans, conform instrucțiunilor organizatorilor.",
+    "about-li6": "Date corecte: nume, club, categorie.",
+    "about-li7": "Adeverință medicală / asigurare conform regulilor.",
+    "about-li8": "Organizatorii pot modifica programul dacă este necesar.",
+
+    "about-card3-title": "Informații importante",
+    "about-li9": "Vă rugăm să ajungeți din timp pentru cântar.",
+    "about-li10": "Echipament: judogi (alb/albastru) recomandat.",
+    "about-li11": "Zone dedicate pentru spectatori și însoțitori.",
+    "about-li12": "Info suplimentar: secțiunea Contact / WhatsApp.",
+
+    "location-title": "Locație",
+    "location-sub": "Competiția are loc în România, la Oradea.",
+    "location-card-title": "Detalii",
+    "location-li1": "Țară: România",
+    "location-li2": "Oraș: Oradea",
+    "location-li3": "Sală: Sala Sporturilor Borș(i)",
+    "location-li4": "Acces: ușor cu mașina și transport public (parcare în limita locurilor disponibile).",
+
+    "categories-title": "Categorii",
+    "categories-sub": "Categoriile finale se confirmă conform anunțului oficial. Mai jos este o listă (model).",
+    "cat-card1-title": "Grupe de vârstă (model)",
+    "cat1": "U10",
+    "cat2": "U12",
+    "cat3": "U14",
+    "cat4": "U16",
+    "cat-card2-title": "Alte grupe",
+    "cat5": "U18",
+    "cat6": "U21",
+    "cat7": "Senior",
+    "cat8": "Veterani (dacă există în regulament)",
+    "cat-card3-title": "Sex & categorii de greutate",
+    "cat9": "Băieți / Fete",
+    "cat10": "Categorii de greutate: conform regulamentului",
+    "cat11": "Cântar în ziua competiției (pe intervale)",
+    "cat12": "Tabele finale după înscrieri",
+
+    "download-section-title": "Descărcări",
+    "download-title": "Descărcare Word – listă înscriere / verificare",
+    "download-sub": "Descarcă documentul Word oferit de organizatori (listă / înscriere / verificare).",
+    "download-btn": "⬇️ Descarcă lista Word",
+    "download-note": "Notă: pentru ca butonul să funcționeze, înlocuiește valoarea DOWNLOAD_URL din cod cu link-ul real.",
+
+    "contact-title": "Contact",
+    "contact-main": "Ai întrebări despre competiție, înscriere sau categorii? Scrie-mi sau sună cu încredere.",
+    "contact-list-intro": "Este util dacă menționezi: ",
+    "contact-li1": "clubul / asociația;",
+    "contact-li2": "categoria și numărul estimat de sportivi;",
+    "contact-li3": "orice solicitare specială (program, cântar etc.).",
+    "contact-direct": "Date de contact",
+    "contact-call": "📞 Sună",
+    "contact-email": "✉️ Email",
+    "contact-whatsapp": "💬 WhatsApp",
+    "contact-langs": "Răspundem în maghiară, română și engleză. 🙂",
+
+    "footer-text": "© 2026 Cupa Internațională de Judo Arany – Toate drepturile rezervate."
+  },
+
+  en: {
+    "logo-text": "International Judo Golden Cup 2026",
+
+    "nav-about": "Event",
+    "nav-location": "Venue",
+    "nav-categories": "Categories",
+    "nav-download": "Download",
+    "nav-contact": "Contact",
+
+    "hero-title": 'International <span class="accent">Judo Golden Cup</span> 2026',
+    "hero-sub": "International judo tournament in Oradea, Romania. <br>Event info, categories and a downloadable Word list in one place.",
+    "badge1": "International tournament",
+    "badge2": "Oradea, Romania",
+    "badge3": "Borș(i) Sports Hall",
+    "hero-cta-primary": "📄 Downloads",
+    "hero-cta-secondary": "🥋 View categories",
+
+    "preview-logo": "JUDO",
+    "preview-name": "Golden Cup 2026",
+    "preview-desc": "Info • venue • categories • downloads",
+    "preview-note": "All key info in a clean mobile-friendly layout — great for clubs and parents.",
+
+    "about-title": "Tournament overview",
+    "about-sub": "A clear summary of the International Judo Golden Cup 2026.",
+    "about-card1-title": "General info",
+    "about-li1": "International judo tournament (clubs / associations).",
+    "about-li2": "Goal: fair play, experience, community and development.",
+    "about-li3": "Weigh-in and competition held at the venue.",
+    "about-li4": "Awards: medals / certificates (as per official bulletin).",
+
+    "about-card2-title": "Entry & registration",
+    "about-li5": "Pre-registration according to organizer instructions.",
+    "about-li6": "Provide accurate details: name, club, category.",
+    "about-li7": "Medical clearance / insurance as required by rules.",
+    "about-li8": "Organizers may adjust schedule if needed.",
+
+    "about-card3-title": "Important notes",
+    "about-li9": "Please arrive early for weigh-in.",
+    "about-li10": "Equipment: judogi (white/blue) recommended.",
+    "about-li11": "Designated areas for spectators and companions.",
+    "about-li12": "More info: Contact section / WhatsApp.",
+
+    "location-title": "Venue",
+    "location-sub": "The event takes place in Romania, in Oradea.",
+    "location-card-title": "Details",
+    "location-li1": "Country: Romania",
+    "location-li2": "City: Oradea",
+    "location-li3": "Hall: Borș(i) Sports Hall",
+    "location-li4": "Access: easy by car and public transport (parking subject to availability).",
+
+    "categories-title": "Categories",
+    "categories-sub": "Final categories will be confirmed by the official bulletin. Below is a clean example list.",
+    "cat-card1-title": "Age groups (example)",
+    "cat1": "U10",
+    "cat2": "U12",
+    "cat3": "U14",
+    "cat4": "U16",
+    "cat-card2-title": "More groups",
+    "cat5": "U18",
+    "cat6": "U21",
+    "cat7": "Senior",
+    "cat8": "Veterans (if included)",
+    "cat-card3-title": "Gender & weight classes",
+    "cat9": "Boys / Girls divisions",
+    "cat10": "Weight classes: per official rules",
+    "cat11": "Weigh-in on event day (time slots)",
+    "cat12": "Final brackets based on entries",
+
+    "download-section-title": "Downloads",
+    "download-title": "Word download – entry / check list",
+    "download-sub": "Download the organizer-provided Word document (entry list / check sheet).",
+    "download-btn": "⬇️ Download Word list",
+    "download-note": "Note: replace DOWNLOAD_URL in the code with the real file link to activate the button.",
+
+    "contact-title": "Contact",
+    "contact-main": "Questions about registration or categories? Message or call anytime.",
+    "contact-list-intro": "Helpful details to include: ",
+    "contact-li1": "club / association name;",
+    "contact-li2": "category and expected number of athletes;",
+    "contact-li3": "any special request (schedule, weigh-in, etc.).",
+    "contact-direct": "Direct contacts",
+    "contact-call": "📞 Call",
+    "contact-email": "✉️ Email",
+    "contact-whatsapp": "💬 WhatsApp",
+    "contact-langs": "We can reply in Hungarian, Romanian and English. 🙂",
+
+    "footer-text": "© 2026 International Judo Golden Cup – All rights reserved."
+  }
+};
+
+/* ==========================
+   NYELVÁLLÍTÁS
+   ========================== */
+function setLanguage(lang) {
+  const map = texts[lang];
+  if (!map) return;
+
+  currentLang = lang;
+  document.documentElement.lang = lang;
+
+  for (const key in map) {
+    const el = document.querySelector('[data-i18n="'+key+'"]');
+    if (el) el.innerHTML = map[key];
+  }
+
+  document.getElementById('btn-hu').classList.toggle('active', lang === 'hu');
+  document.getElementById('btn-ro').classList.toggle('active', lang === 'ro');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+  refreshDownloadButton();
+}
+
+/* init */
+setLanguage('hu');
+
+document.getElementById('btn-hu').addEventListener('click', () => setLanguage('hu'));
+document.getElementById('btn-ro').addEventListener('click', () => setLanguage('ro'));
+document.getElementById('btn-en').addEventListener('click', () => setLanguage('en'));
+</script>
+</body>
+</html>
