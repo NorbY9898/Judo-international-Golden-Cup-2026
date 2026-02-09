@@ -14,7 +14,6 @@
        ========================= */
     body{
       color:#f7f7f7;
-      /* a poszter háttér */
       background:
         radial-gradient(circle at top, rgba(43,43,43,0.25), rgba(5,5,5,0.95)),
         url("bg.png");
@@ -24,7 +23,6 @@
       background-attachment: fixed;
     }
 
-    /* plusz sötét vignetta, hogy olvasható legyen */
     body::before{
       content:"";
       position:fixed;
@@ -35,17 +33,15 @@
         radial-gradient(circle at 50% 35%, rgba(0,0,0,0.25), rgba(0,0,0,0.80));
     }
 
-    /* ✅ DINAMIKUS GRAIN/NOISE (kódos, nem kell külön fájl) */
     .bg-noise{
       position:fixed;
       inset:0;
-      z-index:0;              /* a tartalom mögött, de a háttér felett */
+      z-index:0;
       pointer-events:none;
-      opacity:0.08;           /* állíthatod: 0.05–0.12 */
+      opacity:0.08;
       mix-blend-mode: overlay;
       background-size: 180px 180px;
       animation: noiseShift 0.85s steps(2) infinite;
-      /* Inline SVG "noise" - nem kell noise.png */
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
     }
     @keyframes noiseShift{
@@ -53,7 +49,6 @@
       100% { transform: translate(-12px, 10px); }
     }
 
-    /* a tartalom legyen a noise felett */
     header, main, footer, .banner-rails{ position:relative; z-index:2; }
 
     .wrapper{ max-width:1100px; margin:0 auto; padding:0 16px 40px; }
@@ -169,6 +164,26 @@
     .card-title{ font-weight:bold; margin-bottom:8px; color:#FFE88A; }
     .list{ font-size:0.88rem; color:#e2e2e2; margin-left:16px; line-height:1.55; }
 
+    /* ✅ KÖZÉPSŐ KÉP KÁRTYA */
+    .media-card{
+      border:1px solid rgba(255,215,0,0.55);
+      background:rgba(8,8,8,0.93);
+      box-shadow:0 0 16px rgba(0,0,0,0.85), 0 0 18px rgba(255,215,0,0.12);
+    }
+    .media-img{
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:12px;
+      border:1px solid rgba(255,215,0,0.25);
+    }
+    .media-cap{
+      margin-top:10px;
+      font-size:0.88rem;
+      color:#dcdcdc;
+      line-height:1.45;
+    }
+
     /* Categories (single card) */
     .cat-block{
       background:rgba(8,8,8,0.97);
@@ -219,7 +234,7 @@
 
     /* PC oldalsó bannerek */
     .banner-rails{ position:fixed; top:90px; left:0; right:0; z-index:2; pointer-events:none; }
-    .banner-rail{ position:absolute; width:300px; pointer-events:auto; } /* nagyobb */
+    .banner-rail{ position:absolute; width:300px; pointer-events:auto; }
     .banner-left{ left:18px; }
     .banner-right{ right:18px; }
 
@@ -241,10 +256,9 @@
     .banner-cta:hover{ opacity:1; }
 
     @media (min-width: 1350px){
-      body{ padding-left:340px; padding-right:340px; } /* nagyobb tér a bannereknek */
+      body{ padding-left:340px; padding-right:340px; }
     }
 
-    /* Mobilon a bannerek alul */
     .mobile-banners{ display:none; margin-top:16px; }
     @media (max-width: 1349px){
       .banner-rails{ display:none; }
@@ -252,7 +266,6 @@
       .mobile-banners{ display:block; }
     }
 
-    /* Footer brand */
     .footer-brand{
       margin-top:10px;
       display:flex;
@@ -271,7 +284,6 @@
     .footer-brand a{ color:#FFD700; opacity:0.95; }
     .footer-brand a:hover{ opacity:1; }
 
-    /* Ha a fixed háttér mobilon laggolna, ez segít */
     @media (max-width: 800px){
       body{ background-attachment: scroll; }
       .bg-noise{ opacity:0.06; }
@@ -280,7 +292,6 @@
 </head>
 
 <body>
-  <!-- ✅ Dinamikus grain réteg -->
   <div class="bg-noise" aria-hidden="true"></div>
 
   <!-- PC bannerek -->
@@ -393,6 +404,7 @@
       <h2 class="section-title" data-i18n="about-title"></h2>
       <p class="section-sub" data-i18n="about-sub"></p>
 
+      <!-- ✅ BAL: Általános info | KÖZÉP: Kép | JOBB: Fontos tudnivalók -->
       <div class="grid-3">
         <div class="card">
           <div class="card-title" data-i18n="about-card1-title"></div>
@@ -404,14 +416,11 @@
           </ul>
         </div>
 
-        <div class="card">
-          <div class="card-title" data-i18n="about-card2-title"></div>
-          <ul class="list">
-            <li data-i18n="about-li5"></li>
-            <li data-i18n="about-li6"></li>
-            <li data-i18n="about-li7"></li>
-            <li data-i18n="about-li8"></li>
-          </ul>
+        <!-- ✅ KÉP KÁRTYA -->
+        <div class="card media-card">
+          <div class="card-title" data-i18n="about-media-title"></div>
+          <img class="media-img" src="event_poster.jpg" alt="Event poster">
+          <div class="media-cap" data-i18n="about-media-cap"></div>
         </div>
 
         <div class="card">
@@ -451,6 +460,22 @@
       <div class="cat-block">
         <div class="card-title" style="margin-bottom:2px;" data-i18n="cat-only-title"></div>
         <div class="section-sub" style="margin:6px 0 0;" data-i18n="cat-only-sub"></div>
+
+        <div class="cat-group">
+          <h3 data-i18n="u6-title"></h3>
+          <div class="cat-meta" data-i18n="u6-years"></div>
+          <div class="cat-sex"><strong data-i18n="male"></strong><br><span data-i18n="u6-male"></span></div>
+          <div class="cat-sex"><strong data-i18n="female"></strong><br><span data-i18n="u6-female"></span></div>
+          <div class="cat-meta" style="margin-top:10px;" data-i18n="u6-time"></div>
+        </div>
+
+        <div class="cat-group">
+          <h3 data-i18n="u8-title"></h3>
+          <div class="cat-meta" data-i18n="u8-years"></div>
+          <div class="cat-sex"><strong data-i18n="male"></strong><br><span data-i18n="u8-male"></span></div>
+          <div class="cat-sex"><strong data-i18n="female"></strong><br><span data-i18n="u8-female"></span></div>
+          <div class="cat-meta" style="margin-top:10px;" data-i18n="u8-time"></div>
+        </div>
 
         <div class="cat-group">
           <h3 data-i18n="u10-title"></h3>
@@ -553,7 +578,7 @@
     <footer>
       <span data-i18n="footer-text"></span>
       <div class="footer-brand">
-        <img src="nextn-logo.png" alt="NextN-design logó">
+        <img src="nextn_logo.png" alt="NextN-design logó">
         <span data-i18n="footer-madeby"></span>
         <a href="https://norby9898.github.io/NextN-Digital" target="_blank" rel="noopener">NextN-design</a>
       </div>
@@ -565,11 +590,35 @@
     let currentLang = 'hu';
 
     /* ✅ IDE RAKD BE A WORD LETÖLTÉSI LINKET */
-    const DOWNLOAD_URL = "IDE_ILLASZD_BE_A_WORD_LINKET.docx"; // <-- ITT CSERÉLD LE!
+    const DOWNLOAD_URL = "INTERNATIONAL JUDO GOLD CUP.docx"; // <-- ITT CSERÉLD LE!
 
     function refreshDownloadButton(){
       document.getElementById("btn-download").setAttribute("href", DOWNLOAD_URL);
     }
+
+    /* =========================================================
+       ✅ SÚLYCSOPORT KONSTANSOK (KÉSŐBB ITT ÍRD ÁT, HA VÁLTOZIK)
+       ========================================================= */
+    const U6_MALE   = " 17 kg,  19 kg,  21 kg,  23 kg,  25 kg,  27 kg, 30 kg, 34 kg, 38 kg, +38 kg.";
+    const U6_FEMALE = " 18 kg,  20 kg,  22 kg,  24 kg,  26 kg,  28 kg, 32 kg, 36 kg, 40 kg, +40 kg";
+
+    const U8_MALE   = " 17 kg,  19 kg,  21 kg,  23 kg,  25 kg,  27 kg, 30 kg, 34 kg, 38 kg, +38 kg.";
+    const U8_FEMALE = " 18 kg,  20 kg,  22 kg,  24 kg,  26 kg,  28 kg, 32 kg, 36 kg, 40 kg, +40 kg.";
+
+    const U10_MALE   = "-22 kg, 24 kg, -28 kg, -32 kg, 34 kg, -38 kg, -42 kg, -46 kg, -50 kg, -55 kg, +55 kg.";
+    const U10_FEMALE = "-20 kg, 24 kg, -28 kg, -32 kg, 34 kg, -36 kg, -40 kg, -44 kg, -48 kg, -52 kg, +52 kg.";
+
+    const U6_TIME_HU  = "Küzdelmi idő: 2 perc (GS 1 perc)";
+    const U6_TIME_RO  = "Timp de luptă: 2 minute (GS 1 min.)";
+    const U6_TIME_EN  = "Fight time: 2 minutes (GS 1 min.)";
+
+    const U8_TIME_HU  = "Küzdelmi idő: 2 perc (GS 1 perc)";
+    const U8_TIME_RO  = "Timp de luptă: 2 minute (GS 1 min.)";
+    const U8_TIME_EN  = "Fight time: 2 minutes (GS 1 min.)";
+
+    const U10_TIME_HU = "Küzdelmi idő: 2 perc (GS 1 perc)";
+    const U10_TIME_RO = "Timp de luptă: 2 minute (GS 1 min.)";
+    const U10_TIME_EN = "Fight time: 2 minutes (GS 1 min.)";
 
     const texts = {
       hu: {
@@ -581,9 +630,9 @@
         "nav-contact": "Kapcsolat",
 
         "hero-title": 'Nemzetközi <span class="accent">Judo Arany Kupa</span> 2026',
-        "hero-sub": "Nemzetközi Cselgáncs verseny Nagyváradon. <br>Kategóriák, súlycsoportok és letölthető Word lista egy helyen.",
+        "hero-sub": "Nemzetközi Cselgáncs verseny Borș községben. <br>Kategóriák, súlycsoportok az oldalon megtekinthetők, és a nevezéshez szükséges dokumentum letölthető.",
         "badge1": "Nemzetközi verseny",
-        "badge2": "Nagyvárad (Oradea)",
+        "badge2": "Borș (Románia)",
         "badge3": "Borș(i) Sportcsarnok",
         "hero-cta-primary": "📄 Letöltések",
         "hero-cta-secondary": "🥋 Kategóriák",
@@ -600,11 +649,9 @@
         "about-li2": "Cél: sportszerű küzdelem, tapasztalatszerzés.",
         "about-li3": "Mérlegelés és verseny lebonyolítás a helyszínen.",
         "about-li4": "Díjazás: a szervezői kiírás szerint.",
-        "about-card2-title": "Részvétel & nevezés",
-        "about-li5": "Nevezés előzetesen a szervezők által megadott módon.",
-        "about-li6": "Pontos adatok: név, klub, kategória.",
-        "about-li7": "Orvosi igazolás / biztosítás a szabályzat szerint.",
-        "about-li8": "A szervezők fenntartják a program módosítás jogát.",
+
+       
+
         "about-card3-title": "Fontos tudnivalók",
         "about-li9": "Kérjük időben érkezni a mérlegeléshez.",
         "about-li10": "Felszerelés: judogi (fehér/kék) ajánlott.",
@@ -613,25 +660,37 @@
         "about-li13": "A sportolókat kísérő tanárok/edzők/hivatalos személyek teljes felelősséggel tartoznak a sportolók viselkedéséért és védelméért a verseny teljes ideje alatt. A szervezők ezért nem tehetők felelőssé; a fő felelősség a kísérő személyzetet terheli.",
 
         "location-title": "Helyszín",
-        "location-sub": "A verseny Romániában, Nagyváradon kerül megrendezésre.",
+        "location-sub": "A verseny Romániában, Borș községben kerül megrendezésre.",
         "location-card-title": "Részletek",
         "location-li1": "Ország: Románia",
-        "location-li2": "Város: Nagyvárad (Oradea)",
+        "location-li2": "Község: Borș",
         "location-li3": "Csarnok: Borș(i) Sportcsarnok",
         "location-li4": "Megközelítés: autóval és tömegközlekedéssel is könnyen elérhető (parkolás a lehetőségek szerint).",
 
         "categories-title": "Kategóriák",
         "categories-sub": "Az alábbi korcsoportok, súlycsoportok és küzdelmi idők a megadott kiírás szerint.",
-        "cat-only-title": "Korcsoportok (U10 / U12 / U14 / U16)",
+        "cat-only-title": "Korcsoportok (U6 / U8 / U10 / U12 / U14 / U16)",
         "cat-only-sub": "Fiúk/Lányok súlycsoportok + küzdelmi idő (GS).",
         "male": "Férfi (Fiúk)",
         "female": "Női (Lányok)",
 
+        "u6-title": "U6",
+        "u6-years": "Korcsoport: U6",
+        "u6-male": U6_MALE,
+        "u6-female": U6_FEMALE,
+        "u6-time": U6_TIME_HU,
+
+        "u8-title": "U8",
+        "u8-years": "Korcsoport: U8",
+        "u8-male": U8_MALE,
+        "u8-female": U8_FEMALE,
+        "u8-time": U8_TIME_HU,
+
         "u10-title": "U10",
         "u10-years": "Születési év: 2017 / 2018",
-        "u10-male": "-22 kg, 24 kg, -28 kg, -32 kg, 34 kg, -38 kg, -42 kg, -46 kg, -50 kg, -55 kg, +55 kg.",
-        "u10-female": "-20 kg, 24 kg, -28 kg, -32 kg, 34 kg, -36 kg, -40 kg, -44 kg, -48 kg, -52 kg, +52 kg.",
-        "u10-time": "Küzdelmi idő: 2 perc (GS 1 perc)",
+        "u10-male": U10_MALE,
+        "u10-female": U10_FEMALE,
+        "u10-time": U10_TIME_HU,
 
         "u12-title": "U12",
         "u12-years": "Születési év: 2015 / 2016",
@@ -655,7 +714,7 @@
         "download-title": "Word letöltés – nevezési / ellenőrző lista",
         "download-sub": "Innen tudod letölteni a Word dokumentumot.",
         "download-btn": "⬇️ Word lista letöltése",
-        "download-note": "Cseréld ki a DOWNLOAD_URL értékét a valódi linkre.",
+
 
         "contact-title": "Kapcsolat",
         "contact-main": "Kérdésed van a nevezéssel vagy kategóriákkal kapcsolatban? Írj vagy hívj bátran.",
@@ -701,9 +760,9 @@
         "nav-contact": "Contact",
 
         "hero-title": 'Concurs <span class="accent">internațional de judo</span> – Cupa de Aur 2026',
-        "hero-sub": "Competiție internațională de judo la Oradea. <br>Categorii, greutăți și listă Word de descărcat într-un singur loc.",
+        "hero-sub": "Competiție internațională de judo în Borș. <br>Categoriile și greutățile sunt pe site, iar documentul (Word) pentru înscriere se poate descărca.",
         "badge1": "Competiție internațională",
-        "badge2": "Oradea",
+        "badge2": "Borș, România",
         "badge3": "Sala Sporturilor Borș(i)",
         "hero-cta-primary": "📄 Descărcări",
         "hero-cta-secondary": "🥋 Categorii",
@@ -720,11 +779,9 @@
         "about-li2": "Scop: fair-play, experiență, dezvoltare sportivă.",
         "about-li3": "Cântar + desfășurare la locație.",
         "about-li4": "Premiere: conform regulamentului.",
-        "about-card2-title": "Participare & înscriere",
-        "about-li5": "Înscriere în avans, conform instrucțiunilor organizatorilor.",
-        "about-li6": "Date corecte: nume, club, categorie.",
-        "about-li7": "Adeverință medicală / asigurare conform regulilor.",
-        "about-li8": "Organizatorii pot modifica programul dacă este necesar.",
+
+       
+
         "about-card3-title": "Informații importante",
         "about-li9": "Vă rugăm să ajungeți din timp pentru cântar.",
         "about-li10": "Echipament: judogi (alb/albastru) recomandat.",
@@ -733,25 +790,37 @@
         "about-li13": "Profesorii, antrenorii și oficialii care însoțesc sportivii sunt direct răspunzători de comportamentul și protecția acestora pe tot parcursul desfășurării competiției. Organizatorii nu pot fi făcuți răspunzători pentru aceste aspecte, deoarece responsabilitatea principală revine personalului însoțitor.",
 
         "location-title": "Locație",
-        "location-sub": "Competiția are loc în România, la Oradea.",
+        "location-sub": "Competiția are loc în România, în comuna Borș.",
         "location-card-title": "Detalii",
         "location-li1": "Țară: România",
-        "location-li2": "Oraș: Oradea",
+        "location-li2": "Comuna: Borș",
         "location-li3": "Sală: Sala Sporturilor Borș(i)",
         "location-li4": "Acces: ușor cu mașina și transport public (parcare în limita locurilor disponibile).",
 
         "categories-title": "Categorii",
         "categories-sub": "Mai jos sunt grupele de vârstă, categoriile de greutate și durata luptei conform datelor primite.",
-        "cat-only-title": "Grupe de vârstă (U10 / U12 / U14 / U16)",
+        "cat-only-title": "Grupe de vârstă (U6 / U8 / U10 / U12 / U14 / U16)",
         "cat-only-sub": "Masculin/Feminin + greutăți + timp de luptă (GS).",
         "male": "Masculin",
         "female": "Feminin",
 
+        "u6-title": "U6",
+        "u6-years": "Categorie de vârstă: U6",
+        "u6-male": U6_MALE,
+        "u6-female": U6_FEMALE,
+        "u6-time": U6_TIME_RO,
+
+        "u8-title": "U8",
+        "u8-years": "Categorie de vârstă: U8",
+        "u8-male": U8_MALE,
+        "u8-female": U8_FEMALE,
+        "u8-time": U8_TIME_RO,
+
         "u10-title": "U10",
         "u10-years": "Ani naștere: 2017 / 2018",
-        "u10-male": "-22 kg, 24 kg, -28 kg, -32 kg, 34 kg, -38 kg, -42 kg, -46 kg, -50 kg, -55 kg, +55 kg.",
-        "u10-female": "-20 kg, 24 kg, -28 kg, -32 kg, 34 kg, -36 kg, -40 kg, -44 kg, -48 kg, -52 kg, +52 kg.",
-        "u10-time": "Timp de luptă: 2 minute (GS 1 min.)",
+        "u10-male": U10_MALE,
+        "u10-female": U10_FEMALE,
+        "u10-time": U10_TIME_RO,
 
         "u12-title": "U12",
         "u12-years": "Ani naștere: 2015 / 2016",
@@ -775,8 +844,7 @@
         "download-title": "Descărcare Word – listă înscriere / verificare",
         "download-sub": "Descarcă documentul Word.",
         "download-btn": "⬇️ Descarcă lista Word",
-        "download-note": "Înlocuiește valoarea DOWNLOAD_URL cu link-ul real.",
-
+      
         "contact-title": "Contact",
         "contact-main": "Întrebări despre înscriere sau categorii? Scrie-mi sau sună cu încredere.",
         "contact-list-intro": "Este util dacă menționezi: ",
@@ -821,9 +889,9 @@
         "nav-contact": "Contact",
 
         "hero-title": 'International <span class="accent">Judo Tournament</span> – Gold Cup 2026',
-        "hero-sub": "International judo tournament in Oradea, Romania. <br>Age groups, weight categories and a downloadable Word list in one place.",
+        "hero-sub": "International judo tournament in Borș, Romania. <br>Age groups & weight classes are available on the website, and the Word file for registration can be downloaded.",
         "badge1": "International tournament",
-        "badge2": "Oradea, Romania",
+        "badge2": "Borș, Romania",
         "badge3": "Borș(i) Sports Hall",
         "hero-cta-primary": "📄 Downloads",
         "hero-cta-secondary": "🥋 Categories",
@@ -840,11 +908,9 @@
         "about-li2": "Goal: fair play, experience and development.",
         "about-li3": "Weigh-in and competition held at the venue.",
         "about-li4": "Awards: according to the official bulletin.",
-        "about-card2-title": "Entry & registration",
-        "about-li5": "Pre-registration according to organizer instructions.",
-        "about-li6": "Provide accurate details: name, club, category.",
-        "about-li7": "Medical clearance / insurance as required by rules.",
-        "about-li8": "Organizers may adjust schedule if needed.",
+
+    
+
         "about-card3-title": "Important information",
         "about-li9": "Please arrive early for weigh-in.",
         "about-li10": "Equipment: judogi (white/blue) recommended.",
@@ -853,25 +919,37 @@
         "about-li13": "Teachers, coaches and officials accompanying the athletes are directly responsible for their behavior and protection throughout the entire competition. The organizers cannot be held liable for these aspects, as the primary responsibility lies with the accompanying staff.",
 
         "location-title": "Venue",
-        "location-sub": "The event takes place in Romania, in Oradea.",
+        "location-sub": "The event takes place in Romania, in the commune of Borș.",
         "location-card-title": "Details",
         "location-li1": "Country: Romania",
-        "location-li2": "City: Oradea",
+        "location-li2": "Commune: Borș",
         "location-li3": "Hall: Borș(i) Sports Hall",
         "location-li4": "Access: easy by car and public transport (parking subject to availability).",
 
         "categories-title": "Categories",
         "categories-sub": "Below are the age groups, weight categories and fight times as provided.",
-        "cat-only-title": "Age groups (U10 / U12 / U14 / U16)",
+        "cat-only-title": "Age groups (U6 / U8 / U10 / U12 / U14 / U16)",
         "cat-only-sub": "Male/Female weight classes + fight time (GS).",
         "male": "Male",
         "female": "Female",
 
+        "u6-title": "U6",
+        "u6-years": "Age group: U6",
+        "u6-male": U6_MALE,
+        "u6-female": U6_FEMALE,
+        "u6-time": U6_TIME_EN,
+
+        "u8-title": "U8",
+        "u8-years": "Age group: U8",
+        "u8-male": U8_MALE,
+        "u8-female": U8_FEMALE,
+        "u8-time": U8_TIME_EN,
+
         "u10-title": "U10",
         "u10-years": "Birth years: 2017 / 2018",
-        "u10-male": "-22 kg, 24 kg, -28 kg, -32 kg, 34 kg, -38 kg, -42 kg, -46 kg, -50 kg, -55 kg, +55 kg.",
-        "u10-female": "-20 kg, 24 kg, -28 kg, -32 kg, 34 kg, -36 kg, -40 kg, -44 kg, -48 kg, -52 kg, +52 kg.",
-        "u10-time": "Fight time: 2 minutes (GS 1 min.)",
+        "u10-male": U10_MALE,
+        "u10-female": U10_FEMALE,
+        "u10-time": U10_TIME_EN,
 
         "u12-title": "U12",
         "u12-years": "Birth years: 2015 / 2016",
@@ -895,7 +973,7 @@
         "download-title": "Word download – entry / check list",
         "download-sub": "Download the Word document here.",
         "download-btn": "⬇️ Download Word list",
-        "download-note": "Replace DOWNLOAD_URL with the real file link.",
+   
 
         "contact-title": "Contact",
         "contact-main": "Questions about registration or categories? Message or call anytime.",
